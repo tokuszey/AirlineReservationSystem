@@ -1,0 +1,239 @@
+﻿@model List<OceanicAirlines.Models.Flight>
+
+@{
+    ViewBag.Title = "Flight Search";
+}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/Content/www.css" />
+    <title> Oceanic Airlines</title>
+</head>
+<header class="section__container header__container">
+    <h1 class="section__header">Your Journey<br />Our Wings </h1>
+    <img src="~/assets/header.jpg" alt="header" />
+</header>
+
+<h2>Flight Search</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="search-form">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label for="fromLocation">From:</label>
+                <select name="fromLocation" id="fromLocation" class="form-control">
+                    <option value="" disabled selected>Select city</option>
+                    @foreach (var city in ViewBag.Cities as List<string>)
+                    {
+                        <option value="@city">@city</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="toLocation">To:</label>
+                <select name="toLocation" id="toLocation" class="form-control">
+                    <option value="" disabled selected>Select city</option>
+                    @foreach (var city in ViewBag.Cities as List<string>)
+                    {
+                        <option value="@city">@city</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="departureDate">Date:</label>
+                <input type="date" name="departureDate" id="departureDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="passenger"><i class="fa fa-male"></i> Passenger:</label>
+                <input type="number" id="passenger" name="passenger" class="form-control" value="1" min="1" max="6" />
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        }
+    </div>
+}
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info mt-3">@ViewBag.Message</div>
+}
+
+@if (Model != null && !Model.Any())
+{
+    <div class="alert alert-warning mt-3">No suitable flights found.</div>
+}
+<section class="services">
+    <div class="service-item">
+        <img src="~/assets/trust.png">
+        <h2>100% Trusted Agency</h2>
+    </div>
+    <div class="service-item">
+        <img src="~/assets/dünya.jpg">
+        <h2>Flight to 5 Continents</h2>
+    </div>
+    <div class="service-item">
+        <img src="~/assets/belge.jpg">
+        <h2>20+ Years of Experience</h2>
+    </div>
+    <div class="service-item">
+        <img src="~/assets/happy.jpg">
+        <h2>98% Our Travelers are Happy</h2>
+    </div>
+</section>
+<div class="-container -margin-top">
+    <h3>Good Offers Right Now</h3>
+    <h6>Up to <strong>50%</strong> discount.</h6>
+</div>
+<div class="-row-padding -text-white -large">
+    <div class="-half -margin-bottom">
+        <div class="-display-container">
+            <img src="~/assets/italya.jpg" alt="Italy" style="width:100%">
+            <span class="-display-bottomleft -padding">Italy</span>
+        </div>
+    </div>
+    <div class="-half">
+        <div class="-row-padding" style="margin:0 -16px">
+            <div class="-half -margin-bottom">
+                <div class="-display-container">
+                    <img src="~/assets/newyork.jpeg" alt="New York" style="width:100%">
+                    <span class="-display-bottomleft -padding">New York</span>
+                </div>
+            </div>
+            <div class="-half -margin-bottom">
+                <div class="-display-container">
+                    <img src="~/assets/dubai.jpg" alt="Dubai" style="width:100%">
+                    <span class="-display-bottomleft -padding">Dubai</span>
+                </div>
+            </div>
+        </div>
+        <div class="-row-padding" style="margin:0 -16px">
+            <div class="-half -margin-bottom">
+                <div class="-display-container">
+                    <img src="~/assets/hollanda.jpg" alt="Holland" style="width:100%">
+                    <span class="-display-bottomleft -padding">Holland</span>
+                </div>
+            </div>
+            <div class="-half -margin-bottom">
+                <div class="-display-container">
+                    <img src="~/assets/p8.jpg" alt="Australia" style="width:100%">
+                    <span class="-display-bottomleft -padding">Australia</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Explore -->
+<div class="-container">
+    <h3>Explore Countries </h3>
+    <p>Travel with us and explore all of the world.</p>
+</div>
+<div class="-row-padding">
+    <div class="-half -margin-bottom">
+        <img src="~/assets/traveller-2.jpg" alt="Paris" style="width:100%">
+        <div class="-container -white">
+            <h3>Paris, France</h3>
+            <p class="-opacity">From $79</p>
+        </div>
+    </div>
+    <div class="-half -margin-bottom">
+        <img src="~/assets/traveller-3.jpg" alt="Singapore" style="width:100%">
+        <div class="-container -white">
+            <h3>Singapore</h3>
+            <p class="-opacity">From $39</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- Newsletter -->
+<div class="-container">
+    <div class="-panel -padding-16 -black -opacity -card -hover-opacity-off">
+        <h2>Get the best offers first!</h2>
+        <p>Join our newsletter.</p>
+        <label>E-mail</label>
+        <input id="emailInput" class="-input -border" type="text" placeholder="Your Email address">
+        <button type="button" class="-button -red -margin-top" onclick="subscribe()">Subscribe</button>
+    </div>
+</div>
+
+<script>
+    function subscribe() {
+        // Display success message
+        alert("You have successfully subscribed!");
+
+        document.getElementById("emailInput").value = "";
+    }
+</script>
+<!----- About-------->
+<section class="about">
+    <div class="about-img">
+        <img src="~/assets/plan-2.jpg">
+    </div>
+    <div class="about-text">
+        <small>ABOUT OUR COMPANY</small>
+        <h2>We are an Airline Company</h2>
+        <p>
+            Welcome to Oceanic Airlines , where we are dedicated to providing the best travel experience for our passengers.
+            Our mission is to offer safe, comfortable, and affordable flights across the globe. With a fleet of modern aircraft and
+            exceptional customer service, we aim to make your journey as seamless and enjoyable as possible.
+        </p>
+        <label><input type="checkbox" checked>Leading airline with global coverage</label>
+        <label><input type="checkbox" checked>Modern fleet equipped with the latest technology</label>
+        <label><input type="checkbox" checked>Commitment to safety and security</label>
+        <label><input type="checkbox" checked>Exceptional customer service from booking to landing</label>
+        <a href="@Url.Action("About", "Home")">ABOUT US</a>
+    </div>
+</section>
+
+<!-- Contact -->
+<div class="-container">
+    <h2>Contact</h2>
+    <p>Let us book your next trip!</p>
+    <i class="fa fa-map-marker" style="width:30px"></i> Istanbul,Turkey<br>
+    <i class="fa fa-phone" style="width:30px"></i> Phone: +90 555 555 55 55<br>
+    <i class="fa fa-envelope" style="width:30px"> </i>
+    <a href="mailto:oceanicairlines@mail.com" style="color: black; text-decoration: none;">Email: oceanicairlines@mail.com</a><br>
+
+    <form id="contactForm" onsubmit="return showConfirmation(event)">
+        <p><input class="-input -padding-16 -border" type="text" placeholder="Name" required name="Name"></p>
+        <p><input class="-input -padding-16 -border" type="email" placeholder="Email" required name="Email"></p>
+        <p><textarea class="-input -padding-16 -border" placeholder="Message" required name="Message"></textarea></p>
+        <p><button class="-button -black -padding-large" type="submit">SEND MESSAGE</button></p>
+    </form>
+
+    <script>
+        function showConfirmation(event) {
+            event.preventDefault();
+            const name = document.getElementsByName("Name")[0].value;
+            const email = document.getElementsByName("Email")[0].value;
+            const message = document.getElementsByName("Message")[0].value;
+
+            alert(`Thank you for your message, ${name}! We have received your email (${email}) and your message: "${message}".`);
+
+            document.getElementById("contactForm").reset();
+        }
+    </script>
+</div>
+
+<p>You can also connect with us on social media:</p>
+<div class="social-links">
+    <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" class="social-icon">
+        <i class="ri-facebook-fill"></i>
+    </a>
+    <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" class="social-icon">
+        <i class="ri-twitter-fill"></i>
+    </a>
+    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" class="social-icon">
+        <i class="ri-instagram-line"></i>
+    </a>
+    <a href="https://www.youtube.com" target="_blank" aria-label="YouTube" class="social-icon">
+        <i class="ri-youtube-fill"></i>
+    </a>
+</div>

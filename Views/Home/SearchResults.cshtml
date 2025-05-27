@@ -1,0 +1,46 @@
+﻿@model IEnumerable<OceanicAirlines.Models.Flight>
+
+@{
+    ViewBag.Title = "Flight Search Results";
+}
+
+<h2>Flight Search Results</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Departure Date</th>
+                <th>Price</th>
+                <th>Buy</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var flight in Model)
+            {
+                <tr>
+                    <td>@flight.FromLocation</td>
+                    <td>@flight.ToLocation</td>
+                    <td>@flight.DepartureDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@flight.Price.ToString("C")</td>
+                    <td>
+                        @using (Html.BeginForm("Purchase", "Account", FormMethod.Get))
+                        {
+                            @Html.Hidden("flightId", flight.FlightID)
+                            <button type="submit" class="btn btn-success">Buy</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No flights found for your search criteria. Please try again.</p>
+}
+
+

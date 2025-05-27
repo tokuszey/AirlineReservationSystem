@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Contact Us";
+}
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="~/Content/Site.css" />
+<link rel="stylesheet" href="~/Content/www.css" />
+<div class="-container">
+    <h2>Contact</h2>
+    <p>Let us book your next trip!</p>
+    <i class="fa fa-map-marker" style="width:30px"></i> Istanbul,Turkey<br>
+    <i class="fa fa-phone" style="width:30px"></i> Phone: +90 555 555 55 55<br>
+    <i class="fa fa-envelope" style="width:30px"> </i>
+    <a href="mailto:oceanicairlines@mail.com" style="color: black; text-decoration: none;">Email: oceanicairlines@mail.com</a><br>
+
+    <form id="contactForm" onsubmit="return showConfirmation(event)">
+        <p><input class="-input -padding-16 -border" type="text" placeholder="Name" required name="Name"></p>
+        <p><input class="-input -padding-16 -border" type="email" placeholder="Email" required name="Email"></p>
+        <p><textarea class="-input -padding-16 -border" placeholder="Message" required name="Message"></textarea></p>
+        <p><button class="-button -black -padding-large" type="submit">SEND MESSAGE</button></p>
+    </form>
+
+    <script>
+        function showConfirmation(event) {
+            event.preventDefault();
+            const name = document.getElementsByName("Name")[0].value;
+            const email = document.getElementsByName("Email")[0].value;
+            const message = document.getElementsByName("Message")[0].value;
+
+            alert(`Thank you for your message, ${name}! We have received your email (${email}) and your message: "${message}".`);
+
+            document.getElementById("contactForm").reset();
+        }
+    </script>
+</div>
+
+
+<p>You can also connect with us on social media:</p>
+<div class="social-links">
+    <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" class="social-icon">
+        <i class="ri-facebook-fill"></i>
+    </a>
+    <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" class="social-icon">
+        <i class="ri-twitter-fill"></i>
+    </a>
+    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" class="social-icon">
+        <i class="ri-instagram-line"></i>
+    </a>
+    <a href="https://www.youtube.com" target="_blank" aria-label="YouTube" class="social-icon">
+        <i class="ri-youtube-fill"></i>
+    </a>
+</div>
+
+

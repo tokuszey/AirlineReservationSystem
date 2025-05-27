@@ -1,0 +1,44 @@
+﻿@model List<OceanicAirlines.Models.Reservation>
+
+<h2>My reservations</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Flight Number</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Date</th>
+                <th>Price</th>
+                <th>Process</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in Model)
+            {
+                <tr>
+                    <td>@reservation.ReservationID</td>
+                    <td>@reservation.FromLocation</td>
+                    <td>@reservation.ToLocation</td>
+                    <td>@reservation.DepartureDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@reservation.Price.ToString("C")</td>
+                    <td>
+                        @using (Html.BeginForm("CancelReservation", "Account", FormMethod.Post))
+                        {
+                            @Html.Hidden("reservationId", reservation.ReservationID)
+                            <button type="submit" class="btn btn-danger">Cancel</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>You don't have a reservation yet.</p>
+}
+
+

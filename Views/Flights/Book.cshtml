@@ -1,0 +1,23 @@
+﻿@model OceanicAirlines.Models.Flight
+
+@{
+    ViewBag.Title = "Book Flight";
+}
+
+<h2>Book Flight</h2>
+
+<form method="post" action="@Url.Action("ConfirmBooking", "Flight")">
+    <input type="hidden" name="flightId" value="@Model.FlightID" />
+    <h3>@Model.FromLocation to @Model.ToLocation</h3>
+    <p>Departure: @Model.DepartureDate.ToString("dd/MM/yyyy")</p>
+    <p>Arrival: @Model.ArrivalDate.ToString("dd/MM/yyyy")</p>
+    <p>Price: @Model.Price</p>
+
+    <label>Name:</label>
+    <input type="text" name="name" required />
+    <br />
+    <label>Credit Card Number:</label>
+    <input type="text" name="creditCard" required />
+    <br />
+    <button type="submit">Confirm Booking</button>
+</form>

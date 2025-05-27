@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Success";
+}
+
+<link rel="stylesheet" href="~/Content/Site.css" />
+<section class="about">
+    <div class="about-img">
+        <img src="~/assets/lounge-1.jpg">
+    </div>
+    <div class="about-text">
+        <small>SUCCESS!</small>
+        <h2>Your transaction has been confirmed!</h2>
+        <p>Your purchase has been completed successfully.<br />You can check your ticket in the My Reservations section.</p>
+        <a href="/Account/MyReservations">My reservations</a>
+        <a href="@Url.Action("Index", "Home")">Home</a>
+    </div>
+</section>

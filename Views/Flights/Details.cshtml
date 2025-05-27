@@ -1,0 +1,12 @@
+﻿@model OceanicAirlines.Models.Flight
+
+<h2>@Model.FromLocation - @Model.ToLocation</h2>
+
+<p>Departure: @Model.DepartureDate.ToString("yyyy-MM-dd HH:mm")</p>
+<p>Arrival: @Model.ArrivalDate.ToString("yyyy-MM-dd HH:mm")</p>
+<p>Price: @Model.Price.ToString("C")</p>
+
+<form method="post" action="@Url.Action("Book", "Flight", new { flightId = Model.FlightID })">
+    <button type="submit">Book This Flight</button>
+</form>
+

@@ -1,0 +1,56 @@
+﻿@model OceanicAirlines.Models.Flight
+
+<h2>Purchase Process</h2>
+
+@if (Model != null)
+{
+    <h3>Flight Information</h3>
+    <p><strong>Departure Point:</strong> @Model.FromLocation</p>
+    <p><strong>Destination:</strong> @Model.ToLocation</p>
+    <p><strong>Departure Date:</strong> @Model.DepartureDate.ToString("dd/MM/yyyy HH:mm")</p>
+    <p><strong>Price:</strong> @Model.Price.ToString("C")</p>
+}
+
+<hr />
+
+<h3>Payment Information</h3>
+@using (Html.BeginForm("Purchase", "Account", FormMethod.Post))
+{
+    @Html.Hidden("flightId", Model.FlightID)
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="ID">ID Number</label>
+        <input type="text" id="ID" name="ID" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" name="cardNumber" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="cardHolderName">Card Holder's Name</label>
+        <input type="text" id="cardHolderName" name="cardHolderName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="expiryDate">Expiration Date (MM/YY)</label>
+        <input type="text" id="expiryDate" name="expiryDate" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" name="cvv" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Buy</button>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <p class="text-danger">@ViewBag.ErrorMessage</p>
+}
+
+
